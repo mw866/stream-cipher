@@ -3,12 +3,13 @@
 ## Instructions
 * Activate virtualenv:
 
+
     source my-venv/bin/activate
 
 * Deactivate virtualenv:
 
-    deactivate
 
+    deactivate
 
 ## Reference:
 
@@ -20,6 +21,6 @@
 * Error installing Python cryptography library:
 
 
-    $ sudo apt-get install build-essential libssl-dev libffi-dev python-dev
+    sudo apt-get install build-essential libssl-dev libffi-dev python-dev
 
 
