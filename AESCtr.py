@@ -2,9 +2,9 @@ from cryptography.hazmat.primitives import hashes, padding
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 import base64
-import binascii
+# import binascii # [mw866] Not used
 import os
-import struct
+import struct # [mw866] Missing in the starter code
 
 
 class AESCtr:
@@ -36,11 +36,16 @@ class AESCtr:
       raise TypeError("data must be bytes.")
     nonce = os.urandom(self._nonce_size)
     ctx = ""
+
     # TODO: Fill in this function
-    pad = []
-    for nonced_counter in self._nonced_counters(nonce, (len(data)+self._block_size_bytes)/self._block_size_bytes): 
-      pad += self._encipher_one_block(nonced_counter)
-    ctx = nonce, [chr(ord(pad_byte) ^ ord(data_byte)) for pad_byte, data_byte in zip(pad, data)]
+    pad = b'' #initialize the pad bytes
+    numblocks = (len(data)+self._block_size_bytes)/self._block_size_bytes # number of blocks
+    nonced_counter_generator = self._nonced_counters(nonce, numblocks) # used to generate nounced_counter = EK(IV ^ ctr)
+    
+    for nonced_counter in nonced_counter_generator: 
+      pad += self._encipher_one_block(nonced_counter) #building the pad
+    ciphertext = ''.join([unichr(ord(pad_byte) ^ ord(data_byte)) for pad_byte, data_byte in zip(pad, data)]) #build ciphertext with byte-wise xor between the pad with data
+    ctx = nonce, ciphertext
     return ctx
 
   def decrypt(self, ctx):
@@ -49,8 +54,13 @@ class AESCtr:
 
     # TODO: Fill in this function.
     pad = ''
-    for nonced_counter in self._nonced_counters(ctx[0], (len(ctx[1])+self._block_size_bytes)/self._block_size_bytes): 
-      pad += self._encipher_one_block(nonced_counter)
-    data  = [chr(ord(pad_byte) ^ ord(ctx_byte)) for pad_byte, ctx_byte in zip(pad, ctx[1])]
+    numblocks = (len(ctx[1])+self._block_size_bytes)/self._block_size_bytes #same as self.encrypt(...)
+    nonce = ctx[0] 
+    ciphertext = ctx[1]
+    nonced_counter_generator = self._nonced_counters(nonce, numblocks) #same as self.encrypt(...)
+
+    for nonced_counter in nonced_counter_generator: 
+      pad += self._encipher_one_block(nonced_counter) 
+    data  = [unichr(ord(pad_byte) ^ ord(ciphertext_byte)) for pad_byte, ciphertext_byte in zip(pad, ciphertext)] #build data with byte-wise xor between the pad with ciphertext
     data=''.join(data)
     return data
