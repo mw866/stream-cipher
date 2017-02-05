@@ -4,6 +4,7 @@ from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 import base64
 import binascii
 import os
+import struct
 
 
 class AESCtr:
@@ -35,9 +36,11 @@ class AESCtr:
       raise TypeError("data must be bytes.")
     nonce = os.urandom(self._nonce_size)
     ctx = ""
-
     # TODO: Fill in this function
-
+    pad = []
+    for nonced_counter in self._nonced_counters(nonce, (len(data)+self._block_size_bytes)/self._block_size_bytes): 
+      pad += self._encipher_one_block(nonced_counter)
+    ctx = nonce, [chr(ord(pad_byte) ^ ord(data_byte)) for pad_byte, data_byte in zip(pad, data)]
     return ctx
 
   def decrypt(self, ctx):
@@ -45,8 +48,9 @@ class AESCtr:
     data = ""
 
     # TODO: Fill in this function.
-
+    pad = ''
+    for nonced_counter in self._nonced_counters(ctx[0], (len(ctx[1])+self._block_size_bytes)/self._block_size_bytes): 
+      pad += self._encipher_one_block(nonced_counter)
+    data  = [chr(ord(pad_byte) ^ ord(ctx_byte)) for pad_byte, ctx_byte in zip(pad, ctx[1])]
+    data=''.join(data)
     return data
-
-
-
