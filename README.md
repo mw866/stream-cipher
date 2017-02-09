@@ -1,4 +1,7 @@
-# CS 5830 HW1
+# Stream Cipher 
+
+Implementation of stream cipher using block cipher i.e. AES ECB mode
+CS 5830 HW1
 
 ## Instructions
 * Activate virtualenv:
