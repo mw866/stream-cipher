@@ -4,10 +4,21 @@ Implementation of stream cipher using block cipher i.e. AES ECB mode
 CS 5830 HW1
 
 ## Instructions
+* Install and initilize virtualenv:
+
+
+        pip install virtualenv
+        virtualenv my-venv
+     
 * Activate virtualenv:
 
 
         source my-venv/bin/activate
+        
+* Install Python cryptography library
+
+
+        pip install cryptography
 
 * Deactivate virtualenv:
 
@@ -31,7 +42,8 @@ CS 5830 HW1
 
 * Python2.7 String Literal: https://docs.python.org/2.7/reference/lexical_analysis.html#string-literals 
 
-## Troubleshooting:
+## Known Issues:
+
 * Error installing Python cryptography library:
 
 
