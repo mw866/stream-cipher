@@ -8,7 +8,7 @@ CS 5830 HW1
 
 
         pip install virtualenv
-        virtualenv my-venv
+        virtualenv --python=python2.7 my-venv
      
 * Activate virtualenv:
 
