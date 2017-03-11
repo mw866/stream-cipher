@@ -30,10 +30,11 @@ CS 5830 HW1
 
         deactivate
 
-* Run test_AESCtr
+* Run test_AESCtr and excluding the `my-venv` folder:
 
 
-        py.test -s test_AESCtr.py
+        py.test --ignore=my-venv
+
 
 ## Reference:
 
