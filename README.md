@@ -47,12 +47,18 @@ CS 5830 HW1
 
 * Python2.7 String Literal: https://docs.python.org/2.7/reference/lexical_analysis.html#string-literals 
 
-## Known Issues:
+## Troubleshooting
 
-* Error installing Python cryptography library:
+### Error installing Python cryptography library:
 
 
         sudo apt-get install build-essential libssl-dev libffi-dev python-dev
 
-* pytest does not shaw stdout if test passed: add -s argument
+### `pytest` does not show stdout if test passed: add -s argument
+
+### `pytest` and `py.test` behave inconsistenly:
+
+`pytest` is from logilab-common instead of Python: http://www.christianlong.com/blog/pytest-vs-pytest.html#the-problem
+
+Solution: `sudo apt-get autoremove python-logilab-common`
 
