@@ -20,11 +20,10 @@ CS 5830 HW1
 
         pip install cryptography
         
- * Install Python pytest library
+* Install Python pytest library
  
  
         pip install pytest
-
 
 * Deactivate virtualenv:
 
