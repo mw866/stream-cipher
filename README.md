@@ -35,6 +35,16 @@ CS 5830 HW1
 
         py.test --ignore=my-venv
 
+* Run standard debugger pdb 
+
+        py.test -x --pdb --ignore=my-venv
+
+* RUN GUI debugger pudb
+
+ 
+        pip install pudb pytest-pudb
+        py.test -x --pudb --ignore=my-venv
+
 
 ## Reference:
 
