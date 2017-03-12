@@ -39,11 +39,16 @@ CS 5830 HW1
 
         py.test -x --pdb --ignore=my-venv
 
-* RUN GUI debugger pudb
+* RUN GUI debugger [pudb](https://github.com/inducer/pudb) and [pytest-pudb](https://github.com/wronglink/pytest-pudb):
 
  
         pip install pudb pytest-pudb
         py.test -x --pudb --ignore=my-venv
+        
+* Run debugger without pytest:
+
+
+        python -m {pdb|pudb.run} my-script.py
 
 
 ## Reference:
