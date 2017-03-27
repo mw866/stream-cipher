@@ -70,7 +70,8 @@ CS 5830 HW1
 
         sudo apt-get install build-essential libssl-dev libffi-dev python-dev
 
-### `pytest` does not show stdout if test passed: add -s argument
+### `pytest` does not show stdout if test passed: 
+Solution: add `-s` argument
 
 ### `pytest` and `py.test` behave inconsistenly:
 
